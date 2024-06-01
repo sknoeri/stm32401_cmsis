@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "name": "STM32 F0",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "/usr/lib/gcc/arm-none-eabi/13.2.1/include",
+                "/usr/lib/arm-none-eabi/include",
+                "/usr/lib/arm-none-eabi/include/c++/13.2.1",
+                "/usr/lib/gcc/arm-none-eabi/13.2.1/include",
+                "/usr/lib/gcc/arm-none-eabi/13.2.1/include-fixed",
+                "/usr/lib/arm-none-eabi/include/machine",
+                "/usr/lib/arm-none-eabi/include/nano",
+                "/usr/lib/arm-none-eabi/include/sys"
+            ],
+            "defines": [
+                "DUSE_HAL_DRIVER",
+                "DSTM32F401xE"
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mcpu=cortex-m4",
+                "-mthumb"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-arm64",
+            "browse": 
+            {
+                "path":
+                [
+                    "${workspaceFolder}/**",
+                    "${workspaceFolder}/Core/Inc",
+                    "${workspaceFolder}/Drivers/CMSIS/Include",
+                    "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                    "/usr/lib/arm-none-eabi/include",
+                    "/usr/lib/arm-none-eabi/include/c++/13.2.1",
+                    "/usr/lib/gcc/arm-none-eabi/13.2.1/include",
+                    "/usr/lib/gcc/arm-none-eabi/13.2.1/include-fixed"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"
+                
+            }
+        }
+    ],
+    "version": 4
+}

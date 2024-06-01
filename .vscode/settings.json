@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "stm32f4xx_hal_def.h": "c",
+        "stdint.h": "c",
+        "_stdint.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "stm32f4xx_hal_conf.h": "c",
+        "stm32f401xe.h": "c",
+        "stm32f4xx_hal_rcc.h": "c",
+        "cstdint": "c",
+        "stm32f4xx_hal_rcc_ex.h": "c",
+        "stm32f4xx.h": "c",
+        "core_cm4.h": "c",
+        "system_stm32f4xx.h": "c",
+        "stm32f4xx_it.h": "c",
+        "string.h": "c"
+    },
+    
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefiles-tools",
+    "cortex-debug.gdbPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin/arm-none-eabi-gdb",
+    "cortex-debug.JLinkGDBServerPath": "C:/Program Files/SEGGER/JLink_V794k/JLinkGDBServerCL.exe",
+    "cortex-debug.stutilPath": "C:/Program Files (x86)/stlink-1.7.0-x86_64-w64-mingw32/bin/st-util",
+    "cortex-debug.armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin"
+}
