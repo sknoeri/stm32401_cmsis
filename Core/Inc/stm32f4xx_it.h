@@ -14,6 +14,8 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+void delay_ms(uint32_t delay);
+uint32_t getTick(void);
 
 #ifdef __cplusplus
 }

@@ -94,11 +94,3 @@ extern void SystemCoreClockUpdate(void);
 #endif
 
 #endif /*__SYSTEM_STM32F4XX_H */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */

@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
+
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -16,16 +16,14 @@ static void USART2_UART_Init(void);
 int main(void)
 {
   SystemClock_Config();
+  GPIO_Init();
   USART2_UART_Init();
-  
-  char * mesage = "Hello World  \r\n";
   while (1)
   {
-    HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-    HAL_Delay(500);
-    if(HAL_GPIO_ReadPin(LD2_GPIO_Port,LD2_Pin) == GPIO_PIN_RESET){
-      HAL_UART_Transmit(&huart2,(uint8_t *)mesage,strlen(mesage),100);
-    }
+    GPIOA->ODR = GPIOA->ODR|(1<<5);
+    delay_ms(500);
+    GPIOA->ODR = GPIOA->ODR &~(1<<5);
+    delay_ms(500);
   }
 }
 
@@ -58,7 +56,13 @@ void SystemClock_Config(void)
   {
     // do nothign 
   }
+
+  // Initalizes the systick counter
+  SysTick->CTRL = SysTick->CTRL | (1<<SysTick_CTRL_ENABLE_Pos)                     // Enables the SYStick counter
+                  |(1<<SysTick_CTRL_TICKINT_Pos)|(1<<SysTick_CTRL_CLKSOURCE_Pos);  // Enables the systick interrup and the sysclock source = AHB procesor clock =84MHz
+  SysTick->LOAD = SysTick->LOAD = (84000-1);                                       // Systick counter to 1ms 
 }
+
 
 /**
   * @brief USART2 Initialization Function
@@ -67,6 +71,7 @@ void SystemClock_Config(void)
   */
 static void USART2_UART_Init(void)
 {
+  /*
   huart2.Instance = USART2;
   huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
@@ -78,7 +83,7 @@ static void USART2_UART_Init(void)
   if (HAL_UART_Init(&huart2) != HAL_OK)
   {
     Error_Handler();
-  }
+  }*/
 }
 
 /**
@@ -88,8 +93,13 @@ static void USART2_UART_Init(void)
   */
 static void GPIO_Init(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
+  // ENables the GPIOA port clkock
+  RCC->AHB1LPENR = RCC->AHB1ENR| RCC_AHB1ENR_GPIOAEN;   // Enable the Clock to the GPIOA register
+  GPIOA->MODER = GPIOA->MODER| GPIO_MODER_MODE5_0;      // Putes the GPOAPIN5 into ouput mode
+  GPIOA->OTYPER = GPIOA->OTYPER &~GPIO_OTYPER_OT5;    // Puts into push-pull mode
+  GPIOA->OSPEEDR = GPIOA->OSPEEDR &~GPIO_OSPEEDER_OSPEEDR5_0 &~GPIO_OSPEEDER_OSPEEDR5_1; // Select low speed  optput mode
+  GPIOA->PUPDR = GPIOA->PUPDR &~GPIO_PUPDR_PUPDR5_0 &~GPIO_PUPDR_PUPDR5_1; // No pullup or pull down resitsor
+  /*
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -106,7 +116,7 @@ static void GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);*/
 }
 
 

@@ -99,7 +99,7 @@ void SysTick_Handler(void)
   tick += 1;
 }
 
-uint32_t getTick(){
+uint32_t getTick(void){
   return tick;
 }
 void delay_ms(uint32_t delay){
