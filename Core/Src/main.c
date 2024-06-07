@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+  
 /* Private variables ---------------------------------------------------------*/
 
 
@@ -34,7 +34,7 @@ int main(void)
 void SystemClock_Config(void)
 {
   RCC->CR = RCC->CR | RCC_CR_HSION;
-  while((RCC->CR & RCC_CR_HSIRDY)!= SET){
+  while(((RCC->CR) & (RCC_CR_HSIRDY))!= SET){ // wait until HSI
     //do nothing
   }
   //Configure PLL
@@ -42,7 +42,7 @@ void SystemClock_Config(void)
                 |RCC_PLLCFGR_PLLM_4| (336<<RCC_PLLCFGR_PLLN_Pos) // M=1/16 and N= 336
                 |RCC_PLLCFGR_PLLP_0| (7<<RCC_PLLCFGR_PLLQ_Pos) ;   // P = 1/4 Q = 7 --> 82MHZ
   RCC->CR = RCC->CR | RCC_CR_PLLON_Msk; // enable PLL
-  while((RCC->CR & RCC_CR_PLLRDY)!= SET){ // wiat until PLL is enabled
+  while(((RCC->CR) & (RCC_CR_PLLRDY))!= SET){ // wiat until PLL is enabled
     //do nothing
   }
 

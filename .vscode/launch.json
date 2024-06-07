@@ -7,7 +7,7 @@
         {
             "name": "STlink launch",
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/stm32401_try.elf",
+            "executable": "${workspaceRoot}/build/stm32401_CMSIS.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "stutil",
@@ -17,13 +17,14 @@
             "runToEntryPoint": "main", // else it starts at reset handler - not interested
             "preLaunchTask": "Build all", // configured in tasks.json
             // "preLaunchCommands": ["Build all"], // you can execute command instead of task
+            "showDevDebugOutput": "raw",
             "svdFile": "", // Include svd to watch device peripherals
             "swoConfig": {} // currently (v1.7.0) not supported
         },
         {
             "name": "STlink attach",
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/stm32401_try.elf",
+            "executable": "${workspaceRoot}/build/stm32401_CMSIS.elf",
             "request": "attach",
             "type": "cortex-debug",
             "servertype": "stutil",
