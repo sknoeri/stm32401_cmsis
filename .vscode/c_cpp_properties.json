@@ -17,8 +17,8 @@
                 "/usr/lib/arm-none-eabi/include/sys"
             ],
             "defines": [
-                "DUSE_HAL_DRIVER",
-                "DSTM32F401xE"
+                "USE_HAL_DRIVER",
+                "STM32F401xE"
             ],
             "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "compilerArgs": [
