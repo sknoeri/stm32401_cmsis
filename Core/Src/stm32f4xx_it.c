@@ -102,14 +102,28 @@ void SysTick_Handler(void)
 uint32_t getTick(void){
   return tick;
 }
-void delay_ms(uint32_t delay){
+void delay_ms(uint32_t ms)
+{
+    // Delay-Funktion basierend auf dem SysTick-Timer
+    SysTick->LOAD = (SystemCoreClock / 1000) - 1;  // 1 ms
+    SysTick->VAL = 0;
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+
+    for (uint32_t i = 0; i < ms; i++)
+    {
+        while (!(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk));
+    }
+
+    SysTick->CTRL = 0;  // SysTick Timer deaktivieren
+}
+/*void delay_ms(uint32_t delay){
   uint32_t t0;
   t0 = getTick();
   while (getTick()-t0<delay){
     //do nothing
   }
   
-}
+}*/
 /******************************************************************************/
 /* STM32F4xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */

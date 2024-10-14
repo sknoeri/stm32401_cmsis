@@ -14,7 +14,7 @@
             //"device": "STM32",
             "device": "STM32F401RE",
             "interface": "swd",
-            "runToEntryPoint": "main", // else it starts at reset handler - not interested
+            //"runToEntryPoint": "main", // else it starts at reset handler - not interested
             "preLaunchTask": "Build all", // configured in tasks.json
             // "preLaunchCommands": ["Build all"], // you can execute command instead of task
             "showDevDebugOutput": "raw",
@@ -30,7 +30,7 @@
             "servertype": "stutil",
             "device": "STM32F401RE",
             "interface": "swd",
-            "runToEntryPoint": "main", // else it starts at reset handler - not interested
+            //"runToEntryPoint": "main", // else it starts at reset handler - not interested
             "preLaunchTask": "Build all", // configured in tasks.json
             // "preLaunchCommands": ["Build all"], // you can execute command instead of task
             "svdFile": "STM32F401.svd", // Include svd to watch device peripherals

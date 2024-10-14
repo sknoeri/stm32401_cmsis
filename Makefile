@@ -38,11 +38,11 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/stm32f4xx_it.c \
-Drivers/CMSIS/Device/ST/STM32F4xx/Source/system_stm32f4xx.c
+Drivers/CMSIS/Device/ST/STM32F4xx/Source/system_stm32f4xx.c \
+startup_stm32f401xe.c
 
 # ASM sources
-ASM_SOURCES =  \
-startup_stm32f401xe.s
+ASM_SOURCES = 
 
 # ASM sources
 ASMM_SOURCES = 
