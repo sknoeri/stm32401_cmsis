@@ -21,9 +21,9 @@ int main(void)
   while (1)
   {
     GPIOA->ODR = GPIOA->ODR|(1<<5);
-    delay_ms(500);
+    delay_ms(1000);
     GPIOA->ODR = GPIOA->ODR &~(1<<5);
-    delay_ms(500);
+    delay_ms(1000);
   }
 }
 
@@ -58,12 +58,15 @@ static void USART2_UART_Init(void)
   */
 static void GPIO_Init(void)
 {
-  // ENables the GPIOA port clkock
-  RCC->AHB1LPENR = RCC->AHB1ENR| RCC_AHB1ENR_GPIOAEN;   // Enable the Clock to the GPIOA register
-  GPIOA->MODER = GPIOA->MODER| GPIO_MODER_MODE5_0;      // Putes the GPOAPIN5 into ouput mode
-  GPIOA->OTYPER = GPIOA->OTYPER &~GPIO_OTYPER_OT5;    // Puts into push-pull mode
-  GPIOA->OSPEEDR = GPIOA->OSPEEDR &~GPIO_OSPEEDER_OSPEEDR5_0 &~GPIO_OSPEEDER_OSPEEDR5_1; // Select low speed  optput mode
-  GPIOA->PUPDR = GPIOA->PUPDR &~GPIO_PUPDR_PUPDR5_0 &~GPIO_PUPDR_PUPDR5_1; // No pullup or pull down resitsor
+  // GPIOA für die LED initialisieren (PA5)
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // Takt für GPIOA aktivieren
+
+  GPIOA->MODER &= ~(3UL << (5 * 2));  // Bits löschen
+  GPIOA->MODER |= (1UL << (5 * 2));  // PA5 als Ausgang
+
+  GPIOA->OTYPER &= ~(1UL << 5);  // PA5 als Push-Pull
+  GPIOA->OSPEEDR |= (3UL << (5 * 2));  // High Speed für PA5
+  GPIOA->PUPDR &= ~(3UL << (5 * 2));  // Kein Pull-Up oder Pull-Down für PA5
 }
 
 
