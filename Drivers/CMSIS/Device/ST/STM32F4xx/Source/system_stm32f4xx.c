@@ -94,6 +94,7 @@ void SystemClock_Config(void)
     // Umschalten auf PLL als Systemtaktquelle
     RCC->CFGR |= RCC_CFGR_SW_PLL;  // PLL als Systemtaktquelle
     while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);  // Warten bis PLL als Systemtaktquelle benutzt wird
+    SystemCoreClockUpdate();
 }
 
 /**

@@ -11,22 +11,33 @@
 /* Private function prototypes -----------------------------------------------*/
 
 static void GPIO_Init(void);
-static void USART2_UART_Init(void);
+static void USART2_UART_Init(uint32_t);
 
 int main(void)
 {
 
   GPIO_Init();
-  USART2_UART_Init();
+  USART2_UART_Init(115200);
   while (1)
   {
     GPIOA->ODR = GPIOA->ODR|(1<<5);
     delay_ms(1000);
+    UART2_SendChar('C');
     GPIOA->ODR = GPIOA->ODR &~(1<<5);
     delay_ms(1000);
   }
 }
 
+void UART2_SendChar(char c) {
+    // Warten, bis das Übertragungsdatenregister leer ist (TXE-Flag gesetzt)
+    while (!(USART2->SR & USART_SR_TXE)); 
+
+    // Zeichen in das Datenregister schreiben
+    USART2->DR = (uint8_t)c;
+
+    // Optional: Warten, bis das Zeichen vollständig gesendet wurde (TC-Flag gesetzt)
+    while (!(USART2->SR & USART_SR_TC)); 
+}
 
 
 /**
@@ -34,8 +45,41 @@ int main(void)
   * @param None
   * @retval None
   */
-static void USART2_UART_Init(void)
+static void USART2_UART_Init(uint32_t baudRate)
 {
+  RCC -> APB1ENR |= RCC_APB1ENR_USART2EN;// enables the clock for USART2
+
+  // GPIOA Pins konfigurieren (PA2: TX, PA3: RX)
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+  GPIOA->MODER |= (2U << (2 * 2)) | (2U << (3 * 2));  // PA2 und PA3 auf Alternate Function
+  GPIOA->AFR[0] |= (7U << (4 * 2)) | (7U << (4 * 3)); // AF7 für USART2
+
+  USART2->CR1 &= ~ USART_CR1_M; // swts the wordlength to 8 bit
+  USART2->CR1 &= ~ USART_CR1_OVER8; // slect oversampling mode 16 
+  USART2->CR1 &= ~ USART_CR1_PCE; // parity control disabled
+  USART2->CR2 &= ~ USART_CR2_STOP; // makes 1 stop bit
+  // set the DMAT in USART_CR3 must figure out how
+
+  // Set the baud rate
+  // Compute the Mantis register and the fraction register from USARTDIV=fck/(8*(2-OVER()*baudrate))
+  /*the formula CRR = (fck + (baud / 2)) / baud; is equivalent with:
+  USARTDIV = ((fck+baudRate/2)*1000)/16/baudRate; 
+  *1000 to keep 3 stellen nach dem komma für frac berechung
+  +baud/2 um kinen rundungs fehler zu machen bei der konvertierung zu uint32_t
+  manti = USARTDIV/1000; // extracts the mantissa ie the int part of USARTDIV
+  frac = (USARTDIV % 1000)*16/1000; // extracts the fraction ie the fractional positions of USARTDIV
+  USART2->BRR |= (manti<<4)|frac;
+  */
+  // fck = SystemCoreClock/2; fck is the APB1 clock
+  uint32_t fck, USARTDIV;
+  fck = SystemCoreClock/2;
+  USARTDIV = (fck + (baudRate/ 2))/baudRate; // works only if OVER1 = 0;
+  USART2->BRR |= USARTDIV;
+
+  // Confiugres the USART mode 
+  USART2->CR1 |= USART_CR1_TE|USART_CR1_RE; // enables recive and transmition
+  USART2->CR1 |= USART_CR1_UE; // enables the usart2  
+
   /*
   huart2.Instance = USART2;
   huart2.Init.BaudRate = 115200;
