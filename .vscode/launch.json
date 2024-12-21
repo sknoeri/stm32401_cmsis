@@ -18,7 +18,7 @@
             "preLaunchTask": "Build all", // configured in tasks.json
             // "preLaunchCommands": ["Build all"], // you can execute command instead of task
             "showDevDebugOutput": "raw",
-            "svdFile": "", // Include svd to watch device peripherals
+            "svdFile": "STM32F401.svd", // Include svd to watch device peripherals
             "swoConfig": {} // currently (v1.7.0) not supported
         },
         {

@@ -2,8 +2,6 @@
 #include "system_stm32f4xx.h"
 #include "stm32f4xx.h"
 
-
-
 /* start address for the initialization values of the .data section. 
 defined in linker script */
 extern uint32_t  _sidata;/* start address for the .data section. defined in linker script */  
@@ -20,26 +18,23 @@ extern int main();
 // Reset handler (entry point after reset)
 void Reset_Handler(){
     uint32_t *src, *dest;
-
     // Copy the data segment initializers from flash to SRAM
     src = &_sidata;
     for (dest = &_sdata; dest < &_edata;) {
         *dest++ = *src++;
     }
-
-
     // Zero fill the .bss segment
     for (dest = &_sbss; dest < &_ebss;) {
         *dest++ = 0;
     }
     //uint32_t *dataInit = &_sidata;
     //uint32_t *data = &_sdata;
-//
+    //
     //// Copy the data segment initializers from flash to SRAM
     //while(dataInit<&_edata){
     //    *data++ = *dataInit++;
     //}
-//
+    //
     //// Init bss segment to zero
     //uint32_t *bss = &_sbss;
     //while(bss<&_ebss){
@@ -51,9 +46,7 @@ void Reset_Handler(){
     __libc_init_array();
     // Enter main
     main();
-
     while(1);
-
 }
 
 // Default handler for unimplemented interrupts
