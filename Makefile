@@ -99,6 +99,7 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 	$(SZ) $@
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(HEX) $< $@
+# $@ ist das target: $(BUILD_DIR)/%.hex ; $< ist die dependecy referenz $(BUILD_DIR)/%.elf 
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(BIN) $< $@	
 $(BUILD_DIR):

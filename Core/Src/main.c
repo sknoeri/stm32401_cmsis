@@ -1,14 +1,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-  
-/* Private variables ---------------------------------------------------------*/
-
-
-/* Private function prototypes -----------------------------------------------*/
+/* function prototypes -----------------------------------------------*/
 
 static void GPIO_Init(void);
 static void USART2_UART_Init(uint32_t);

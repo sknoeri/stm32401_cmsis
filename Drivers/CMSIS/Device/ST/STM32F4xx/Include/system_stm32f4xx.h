@@ -29,7 +29,7 @@
   */
 #ifndef __SYSTEM_STM32F4XX_H
 #define __SYSTEM_STM32F4XX_H
-#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,6 +37,8 @@ extern "C" {
 /** @addtogroup STM32F4xx_System_Includes
   * @{
   */
+#include <stdint.h>
+#include "stm32f4xx.h"
 
 /**
   * @}

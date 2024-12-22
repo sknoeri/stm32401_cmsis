@@ -4,6 +4,9 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
+#include <stdint.h>
+#include "stm32f4xx.h"
+#include "system_stm32f4xx.h"
 
 void NMI_Handler(void);
 void HardFault_Handler(void);

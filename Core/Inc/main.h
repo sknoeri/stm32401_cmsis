@@ -11,6 +11,9 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 void Error_Handler(void);
 #ifdef __cplusplus
 }

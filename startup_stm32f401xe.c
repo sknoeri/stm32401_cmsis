@@ -1,6 +1,6 @@
-#include "stdint.h"
-#include "system_stm32f4xx.h"
-#include "stm32f4xx.h"
+#include <stdint.h>
+// #include "system_stm32f4xx.h"
+// #include "stm32f4xx.h"
 
 /* start address for the initialization values of the .data section. 
 defined in linker script */
@@ -15,6 +15,7 @@ extern uint32_t  _estack; // top of stack
 extern void __libc_init_array();
 // main function
 extern int main();
+extern void SystemInit(void);
 // Reset handler (entry point after reset)
 void Reset_Handler(){
     uint32_t *src, *dest;
