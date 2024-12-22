@@ -4,16 +4,15 @@
             "name": "STM32 F0",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/Core/Inc",
-                "${workspaceFolder}/Drivers/CMSIS/Include",
-                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/Inc",
+                "${workspaceFolder}/Drivers_CMSIS/Include",
+                "${workspaceFolder}/Drivers_CMSIS/Device_MemDefs/STM32F4xx/Include",
                 "/usr/lib/arm-none-eabi/include",
                 "/usr/lib/arm-none-eabi/include/machine",
                 "/usr/lib/arm-none-eabi/include/nano",
                 "/usr/lib/arm-none-eabi/include/sys"
             ],
             "defines": [
-                "USE_HAL_DRIVER",
                 "STM32F401xE"
             ],
             "compilerPath": "/usr/bin/arm-none-eabi-gcc",
@@ -28,10 +27,11 @@
             {
                 "path":
                 [
+                    "${workspaceFolder}",
                     "${workspaceFolder}/**",
-                    "${workspaceFolder}/Core/Inc",
-                    "${workspaceFolder}/Drivers/CMSIS/Include",
-                    "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                    "${workspaceFolder}/Inc",
+                    "${workspaceFolder}/Drivers_CMSIS/Include",
+                    "${workspaceFolder}/Drivers_CMSIS/Device_MemDefs/STM32F4xx/Include",
                     "/usr/lib/arm-none-eabi/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,

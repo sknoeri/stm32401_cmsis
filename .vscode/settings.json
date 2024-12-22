@@ -35,6 +35,7 @@
         "cmsis_gcc.h": "c",
         "cmsis_compiler.h": "c",
         "stm32f4xx_it.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "stm32f4xx_uart2.h": "c"
     }
 }

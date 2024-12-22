@@ -17,10 +17,12 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-Core/Src/main.c \
-Core/Src/stm32f4xx_it.c \
-Drivers/CMSIS/Device/ST/STM32F4xx/Source/system_stm32f4xx.c \
-startup_stm32f401xe.c
+Src/stm32f4xx_it.c \
+Drivers_CMSIS/Device_MemDefs/STM32F4xx/Source/system_stm32f4xx.c \
+Src/startup/startup_stm32f401xe.c \
+Src/stm32f4xx_UART2.c \
+main.c 
+
 #######################################
 # binaries
 #######################################
@@ -51,9 +53,10 @@ C_DEFS =  \
 -DSTM32F401xE
 # C includes
 C_INCLUDES =  \
--ICore/Inc \
--IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
--IDrivers/CMSIS/Include
+-IInc \
+-IDrivers_CMSIS/Device_MemDefs/STM32F4xx/Include \
+-IDrivers_CMSIS/Include \
+-I
 # compile gcc flags
 CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
@@ -68,7 +71,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32F401RETx_FLASH.ld
+LDSCRIPT = Src/startup/STM32F401RETx_FLASH.ld
 # libraries
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
@@ -76,7 +79,6 @@ LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BU
 # default action: build all
 # Der : nach etwasem schaut ob das was dem : steht existiert
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
-
 #######################################
 # build the application
 #######################################
@@ -89,10 +91,10 @@ vpath %.c $(sort $(dir $(C_SOURCES)))
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 # Asemby file complier stuff not needed animore
-$(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
-	$(AS) -c $(CFLAGS) $< -o $@
-$(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
-	$(AS) -c $(CFLAGS) $< -o $@
+# $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
+# 	$(AS) -c $(CFLAGS) $< -o $@
+# $(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
+# 	$(AS) -c $(CFLAGS) $< -o $@
 # Build elf stuf
 $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
