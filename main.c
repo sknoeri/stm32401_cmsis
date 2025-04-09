@@ -21,6 +21,35 @@ int main(void)
   }
 }
 
+static void I2C_Init(void)
+{
+  // Enable clock for I2C1
+  RCC->APB1ENR |= RCC_APB1ENR_I2C1EN;
+
+  // Configure GPIOB for I2C1 (PB6 -> SCL, PB7 -> SDA)
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;  // Enable clock for GPIOB
+
+  GPIOB->MODER &= ~((3UL << (6 * 2)) | (3UL << (7 * 2)));  // Clear mode bits for PB6 and PB7
+  GPIOB->MODER |= (2UL << (6 * 2)) | (2UL << (7 * 2));  // Set alternate function mode for PB6 and PB7
+
+  GPIOB->OTYPER |= (1UL << 6) | (1UL << 7);  // Open-drain for PB6 and PB7
+  GPIOB->OSPEEDR |= (3UL << (6 * 2)) | (3UL << (7 * 2));  // High speed for PB6 and PB7
+  GPIOB->PUPDR &= ~((3UL << (6 * 2)) | (3UL << (7 * 2)));  // No pull-up, no pull-down for PB6 and PB7
+
+  GPIOB->AFR[0] |= (4UL << (6 * 4)) | (4UL << (7 * 4));  // Set alternate function 4 (I2C1) for PB6 and PB7
+
+  // Configure I2C1
+  I2C1->CR1 = 0;  // Clear control register
+  I2C1->CR2 = 16;  // Set peripheral clock frequency to 16 MHz
+  I2C1->CCR = 80;  // Configure clock control register for 100 kHz I2C clock
+  I2C1->TRISE = 17;  // Configure maximum rise time
+
+  I2C1->CR1 |= I2C_CR1_PE;  // Enable I2C1
+  // SYSCFG->EXTICR[0] &= ~(SYSCFG_EXTICR1_EXTI0);  // EXTI0 auf PA0 konfigurieren
+
+}
+
+
 static void GPIO_Init(void)
 {
   // GPIOA für die LED initialisieren (PA5)
