@@ -7,10 +7,12 @@
                 "${workspaceFolder}/Inc",
                 "${workspaceFolder}/Drivers_CMSIS/Include",
                 "${workspaceFolder}/Drivers_CMSIS/Device_MemDefs/STM32F4xx/Include",
-                "/usr/lib/arm-none-eabi/include",
-                "/usr/lib/arm-none-eabi/include/machine",
-                "/usr/lib/arm-none-eabi/include/nano",
-                "/usr/lib/arm-none-eabi/include/sys"
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include",
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed",
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine",
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include",
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine",
+                "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys"
             ],
             "defines": [
                 "STM32F401xE"
@@ -32,7 +34,12 @@
                     "${workspaceFolder}/Inc",
                     "${workspaceFolder}/Drivers_CMSIS/Include",
                     "${workspaceFolder}/Drivers_CMSIS/Device_MemDefs/STM32F4xx/Include",
-                    "/usr/lib/arm-none-eabi/include"
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include",
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed",
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine",
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include",
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine",
+                    "/usr/lib/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"

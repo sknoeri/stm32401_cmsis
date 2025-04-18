@@ -1,0 +1,8 @@
+# Ignore the build folder
+build/
+**/*.vc.db-wal
+# Ignore the SQLite database files
+**/*.db
+# Ignore the SQLite WAL files
+**/*.db-shm
+# Ignore the SQLite WAL files 
